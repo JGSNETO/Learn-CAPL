@@ -196,3 +196,26 @@ sizeof - elCount - sizeof has no exact equivalent
 sprintf - snprintf - Similar string formatting parameters used
 printf - write - Similar string formatting parameters used
 
+### Declaration
+
+char letter = "a";
+message wakeup xxx;
+int j,k = 2, 0 ;
+
+```
+includes{
+
+}
+
+variables {
+    int a =10;
+    int b = 25;
+    message ACCInfo _mAccInfo;
+}
+
+on start{
+    write("Welcome to CAPL programming");
+    settimer(one_sec,1);
+}
+
+```
