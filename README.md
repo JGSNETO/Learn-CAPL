@@ -57,3 +57,142 @@ on message 0x123 {
     //do something
 }
 ```
+### CAPL program organization 
+- Overaal, the organization of a CAPL program follows a similar structure to other programming languages, with header files, global variables, functions and event handlers. Understanding this basic structure can help you create well organized and effective CAPL scripts. 
+  
+1. Header Files: At the top of your CAPL script, you may include header files that define macros, data types, and functions that you want to use in your script. 
+```
+#include "CAN.h" //Include the CAN header file
+#include "MyLyb.h" //Include a custom library header file
+1. Global Variable Declarations: You can declare global variables that will be accessible throughout your CAPL script. 
+```
+int myInt = 5;//Declare a global integer variable
+message myMessage; // Declare a global message variable
+```
+1. Functions: You can define functions that perform specific tasks in your CAPL script. 
+```
+void sendMyMessage() {
+    myMessage.id =0x123;
+    myMessage.dlc=8;
+    output(myMessage);
+}
+```
+1. Event Procedures: You can define event handler functions that will be called when specific events occur in the CANoe simulation environment.
+```
+on start {
+    write("Simulation started.");
+}
+
+on timer 100 {
+    sendMyMessage();
+}
+```
+4. Main funtions: Finally, you may define a main functions that is called when the simulation starts. This function typically includes initialization code and starts any necessary timers or 
+event handlers. 
+```
+```
+void main() {
+    write("Starting simulation...");
+    setTimer(1, 100); // start a timer to send messages every 100ms
+}
+```
+
+### Standard C syntax supported
+
+- Instructions blocks: {..}
+- Type casting: (type) Variable
+- if {..} and if {..} else {..}
+- switch, case, default
+- For.., while.., do.. while loops
+- continue and break
+return 
+- //Comments or /*Long comments*/
+
+### C Keywords supported
+1. Supported
+- break
+- case
+- char
+- continue
+- do
+- double
+- else
+- float
+- for 
+- if
+- int 
+- long
+- return 
+- switch
+- while
+2. Not supported
+- auto
+- const
+- enum
+- extern
+- goto
+- register
+- short
+- signed
+- sizeof
+- static 
+- struct
+- typedef 
+- union
+- unsigned
+- volatile
+
+### CAPL data types
+
+- Big differences from C
+
+1. char: Character: 8bit: unsigned
+2. byte: byte: 8 bit: unsigned
+3. int: integer: 16 bit: signed
+4. word: word: 16 bit: unsigned
+5. long: long integer: 32 bit: signed
+6. dword: double word: 32 bit: unsigned 
+7. float: single precision floating point: 64 bit: signed
+8. double: single precision floating point: 64 bit: signed
+9. message: a communication message: -: -
+10. timer/msTimer: a timer with second resolution/ a timer with millisecond resolution: -: -
+
+### Standard C operators supported
+
+1. +,-,*, /, %: add, subtract, multiply, divide, modulo
+2. ==, !0: Equal to, not equal to
+3. >, >=, <, <=: Greater than, greater than or equal to, less than, less than or equal to
+4. ++, --: Increment, decrement(Can be used as a prefix or postfix)
+5. =: Assignment 
+6. +=, -=, *=, /=, %=: Compound assignment(Addition, subtraction, Multiplication, Division, Modulo)
+
+### Standard C Operators supported
+
+1. Logical Operators
+- &&, ||: Logical AND, logical OR 
+- ?: Conditional operator
+- !: Logical negation 
+  
+2. Bitwise Operators
+- ~: Bitwise negation
+- &,^, |: Bitwise AND, bitwise XOR, bitwise OR
+- <<, >>: Left shift, right shift 
+- <<=, >>=: Compound assignment(Left shift, Right shift)
+- &=, ^=, |=: Compound assifnment(Bitwise AND, bitwise XOR, bitwise OR)
+
+### Important differences from C
+
+- Function overloading is allowed
+- The "this" keyword 
+- Local variables are static(Assigned only once and retains its value)
+- Dynamic memory and the elCount() function
+- Variables are assigned a default value implicitly
+- Run-time error handling 
+
+### CAPL equivalents to C functions
+
+C Function - CAPL Function - Notes
+sizeof - elCount - sizeof has no exact equivalent 
+sprintf - snprintf - Similar string formatting parameters used
+printf - write - Similar string formatting parameters used
+
