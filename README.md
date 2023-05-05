@@ -218,4 +218,32 @@ on start{
     settimer(one_sec,1);
 }
 
+on time one_sec {
+    write("Value of letter_a = %c", letter_a);
+    wirte("Number of days in a year = %d", number_days_in_year);
+    _maAccInfo.byte(0)=0x11;
+    output(_mAccInfo);
+}
 ```
+
+### Initialization
+
+- In contrast to standard C, the compiler initializes all numeric variables to 0 and all string-type variables to null. 
+- All message-type variables in CAPL are usually initialized to the transmit request state with its data field defaulted to 0. 
+- The state represents the direction of transmission before the message is transmitted. 
+- Timer-type variables, on the other hand, are not automatically initializaed and do not need to be initialized. 
+
+### Local Variables 
+
+- One important difference in CAPL when compared to C is that local variables are always declared statically. 
+- This means that they are initialized only once. 
+- The first time the event procedure or user-defined functions is executed. 
+- When variables enter the procedure, they assume the value they had at the end of the previous execution of the procedure. 
+
+```
+void myFunc(){
+    byte value = 10; //Static called once
+    write("Valur = %d", value);
+    ...
+    value =35;
+}
