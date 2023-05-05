@@ -247,3 +247,11 @@ void myFunc(){
     ...
     value =35;
 }
+```
+
+### Static memory: C x CAPL
+
+- In C programming language, static memory refers to a type of memory allocation where the memory is allocated at compile-time and persists throughout the entire execution of the program. The static memory is allocates in a region of memory separate from the stack and heap, and its contents are initialized to zero by default. 
+- Static memory in C is used to store global variables, which can be accessed by any function within the program. Static variables can also be used inside functions, but their values persists between function calls, unlike automatic variables which are allocated on the stack and are destroyed when the function returns. 
+- In CAPL, which is a scripting language used for developing test applications in the automotive industry, static memory has a slightly different meaning. In CAPL, static variables are used to store values that should persist between functions calls, just like in C. However, in CAPL, all variables are static by default, which means that they persist between function calls and their values are preserved across function boundaries. This is a different from C, where automatic variables are allocated on the stack and are destroyed when the function returns. 
+- The main difference between static memory in C and CAPL is that in C, static memory is used to store global variables and can be used inside functions to preserve their value between calls, whereas in CAPL, all variable are static by default and persist between function calls. 
