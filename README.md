@@ -255,3 +255,30 @@ void myFunc(){
 - Static memory in C is used to store global variables, which can be accessed by any function within the program. Static variables can also be used inside functions, but their values persists between function calls, unlike automatic variables which are allocated on the stack and are destroyed when the function returns. 
 - In CAPL, which is a scripting language used for developing test applications in the automotive industry, static memory has a slightly different meaning. In CAPL, static variables are used to store values that should persist between functions calls, just like in C. However, in CAPL, all variables are static by default, which means that they persist between function calls and their values are preserved across function boundaries. This is a different from C, where automatic variables are allocated on the stack and are destroyed when the function returns. 
 - The main difference between static memory in C and CAPL is that in C, static memory is used to store global variables and can be used inside functions to preserve their value between calls, whereas in CAPL, all variable are static by default and persist between function calls. 
+
+### Type casting
+
+- CAPL supports type casting. There are times when you want to conver the value of a variables of one data type to another data type for purposes of evaluating an expression. There are two ways to do this in CAPL, both of which are the same as in C. 
+
+```
+int sum;
+
+sum = (int) 1.6 + (int) 1.7;
+``` 
+
+### Arrays
+- Another type of variables used in CAPL is an array, a collection of data items that all have the same name.
+- Individual data items within an array must all be of the same type.
+- The array name is always followed by square brackets that contain either the array size for a declaration statement or an index value to specify the data location within the array.
+- Each of the individual elements in an array ia ccessed by an integer index. When numbering the elements of an array, the first element is always the number 0.
+- CAPL supports the following type of arrays:
+1. Integer arrays
+2. Character arrays
+3. One-dimensional arrays
+4. Multi-dimensional arrays
+
+```
+int values[5]={0xA1, 0X23, 0X3F, 0X98, 0X45};
+char ECU_name[10] = "BCM";
+char bus_type[3] = {'C','A','N'};
+```
