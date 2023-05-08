@@ -464,3 +464,42 @@ for (int i = 0; i < 10; i++) {
   write("i = " + i + "\n");
 }
 ```
+### This Keyword
+
+- In the CAPL programming language, "this" is a keyword that refers to the current object instance. An object instance is an occurrence of a class in memory, and "this" allows you to reference the specific instance that the current method or functions is operating on. 
+- When you define a method or functions in CAPL, you can use "this" keyword as a reference to the current object instance. For example, consider the following class definition:
+
+```
+class MyClass{
+    int x;
+    void setX(int newX){
+        this.x = newX;
+    }
+};
+```
+- In this example, "this" is used to refer to the current instance of the "MyClass", and the "setX" method sets the value of the "x" member variable for that instance.
+- Using "this" is particularly useful in object-oriented programming, as it allows you to distinguish between member variables or methods that belong to the current object instance and those that belong to the class as a whole. By using "this", you can ensure that your code operates on the correct instance of an object, even if there are multiple instances of the same class in memory.
+
+### user defined functions x Function Overloading 
+
+- In CAPL, a user-defined function is similar to a function defined in the C programming language. A function call is possible in any CAPL event procedure. These functions can contain any legal CAPL code, and are globally accessible. Putting frequently used code in a function makes programs more efficient and organized. 
+
+```
+includes{
+    #include "UserDefineFunctions.cin"; // File user developed 
+}
+```
+
+- Function overloading is allowed.
+- Functons overloading is a feature in programing languages that allows a function to have the same name but different parameters. This means that multiple functions with the same name can exist within the same program, as long as they have a different number or type of parameters.
+- When a functions is called, the compiler or interpreter determines which version of the function to use based on the arguments passed to it. If there is a function with the exact number and types, that functions is used. If not, the compiler or interpreter will try to find a function that can accept the arguments by performing implicit conversions, such as converting an integer to a floating point number.
+- Function overloading can be useful for crating functions that perform similar task but operate on different types of data or have different parameter requiremetns.
+```
+void printme(double num){
+    write("Floating point %f", num);
+}
+
+void printme( int num){
+    write("Floating %d", num);
+}
+```
