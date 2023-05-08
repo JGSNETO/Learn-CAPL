@@ -21,6 +21,7 @@
 - Write window acts like output screen in C programs.
 - Communication protocol functions for RS232 TCP/IP are readily available. Hence we can interface external devices using std network protocol. 
 - CAPL is a event driven software. Triggers: Timer, Key press or Message received. 
+- The execution in CAPL is synchronous.
 
 ### CAPL Fundamentals
 1. You should be familiar with the CAN protocol
@@ -281,4 +282,185 @@ sum = (int) 1.6 + (int) 1.7;
 int values[5]={0xA1, 0X23, 0X3F, 0X98, 0X45};
 char ECU_name[10] = "BCM";
 char bus_type[3] = {'C','A','N'};
+```
+### Main CAPL functions
+1. on start: This functions is called when the simulation or test module starts
+```
+on start{
+    write("Simulation started");
+}
+2. on stop: This functions is called when the simulation or test module stops
+```
+on stop{
+    write("Simulation Stopped");
+}
+```
+3. on timer: This functions is called periodically at specified time interval
+```
+on timer (100){
+    output(0x123, "Hello, World");
+}
+```
+4. on key: This function is called when a specific key is pressed on the keyboard
+```
+on key 'a'{
+    write("Key 'a' was pressed);
+}
+```
+5. on sysvar: This functions is called when a system variable is changed
+on sysvar TIMER_ENABLED{
+    if(TIMER_ENABLED ==1){
+        write("Timer is enabled");
+    }else{
+        write("Timer is disabled");
+    }
+}
+```
+6. output: This functions is used to send a message on the CAN bus
+```
+output(0x123, "Hello, World");
+```
+7. getSignal: This functions is used to read the value of a signal in a message
+```
+int value = getSignal(CAN_MESSAGE::SIGNAL_NAME);
+```
+8. setSignal: This function is used to set the value of a signal in a message
+```
+setSignal(CAN_MESSAGE::SIGNAL_NAME, 0x123);
+```
+9.  getEnvVar: This function is used to read the value of an environment variable
+```
+int value = getEnvVar("ENV_VAR_NAME");
+```
+11. setEnvVar: This functions is used to set the value of an environment variable
+```
+setEnvVar("ENV_VAR_NAME", 123);
+```
+12. getLastError: This function is used to get the description of the last error that occurred in the CAPL script
+```
+int error = getLastError();
+write("Error: " + error + "\n");
+```
+13. write: This function is used to write messages to the CAPL output window
+```
+write("This is a message\n");
+```
+
+### Branching Statements 
+
+- Branching statements in computer programming allow the program to alter its flow of execution based on certain conditions or criteria. The most common brnching statements are "if", "else", "else if", "switch" and "case". 
+
+``` 
+float MPH = 70.0;
+float speed;
+float cruising_speed;
+
+if(speed >= MPH) cruising_speed = speed;
+```
+
+```
+includes{
+
+}
+
+variables{
+    int set_speed;
+    int vehiclespeed;
+}
+
+//Can message
+on message ICM_Info{
+    switch(this.CruiseSwitchrequest){
+        case 0x1:
+            setSignal(ACCInfo::ACCState, 2); // Set system state to standby;
+            break;
+        case 0x2: 
+            setSignal(ACCInfo::ACCState,3); /* Signal name ACCState in a message defined in a file called ACCInfo*/
+            if(getSignal(ACCInfo::ACCState)== 0x3){
+                set_speed = vehiclespeed;
+                setSignal(ACCInfo::TargetSpeed, set_speed); //Target is a signal
+            }
+            break;
+    }
+}
+
+on key 's' {
+    write("Set speed is %d", set_speed);
+}
+on message BCMInfo{
+    vehiclespeed = this.VehicleSpeed;
+
+}
+
+```
+
+### Control flow 
+
+1. If statement: Allows you to conditionally execute code based on a specified condition
+```
+if(x > 10){
+write("X is greater than 10\n");
+}
+```
+2. If else statement: Allows you to execute one block of code if a condition is true, and another block of code if the condition is false.
+```
+if(x>10){
+    write("X is greater than 10");
+}else {
+    write("X is less than or equal to 10\n");
+}
+```
+3. Switch statement: Allows you to execute dfferent blocks of code depending on the value of an expression.
+```
+switch (x) {
+  case 1:
+    write("x is 1\n");
+    break;
+  case 2:
+    write("x is 2\n");
+    break;
+  default:
+    write("x is neither 1 nor 2\n");
+    break;
+}
+```
+4. For loop: Allows you to execute a block of code multiple times, based on a specified condition.
+```
+for(int i = 0; i<10; i++){
+    write("i = " + i + "\n");
+}
+```
+5. While loop: Allows you to execute a block of code repeatedly, as long as a specified condition is true.
+```
+int i = 0;
+while (i < 10) {
+  write("i = " + i + "\n");
+  i++;
+}
+```
+6. do while loop: Allows you to execute a block of code at least once, and then repeatedly execute it as long as a specified condition is true. 
+```
+int i = 0;
+do {
+  write("i = " + i + "\n");
+  i++;
+} while (i < 10);
+```
+7. break statement: Allows you to exit a loop prematurely, based on a specified condition.
+```
+for (int i = 0; i < 10; i++) {
+  if (i == 5) {
+    break;
+  }
+  write("i = " + i + "\n");
+}
+```
+8. continue statement: Allows you to skip over the current iteration of a loop, based on a specified condition.
+```
+for (int i = 0; i < 10; i++) {
+  if (i == 5) {
+    continue;
+  }
+  write("i = " + i + "\n");
+}
 ```
