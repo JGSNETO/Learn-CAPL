@@ -503,3 +503,49 @@ void printme( int num){
     write("Floating %d", num);
 }
 ```
+
+### Logging Function 
+
+1. setLogFileName: Sets the name of the log file
+2. setPostTrigger: Sets the posttrigger time for logging 
+3. setPreTrigger: Sets the pretrigger time for logging 
+4. startLogging: Triggers a logging block to stat logging 
+5. stopLogging: Triggers a logging block to stop logging
+6. trigger: Starts all logging blocks to a log
+7. writeToLog: Writes a formatted string to the log file with time stamp
+8. writeToLogEx: Writes a formatted string to the log file without time stamp
+
+```
+//Start automatically
+on sysvar startlogging{
+    char path[200];
+    if(@this){
+        sysGetVariableString(sysvar::Logfilepath, path, elCount(path));
+        setLogFileName(path);
+        startLogging();
+    }
+}
+
+//Stops execution
+on sysvar stoplogging{
+    if(@this){
+        stopLogging();
+    }
+}
+
+on message BCMInfo{
+    if(this.VehicleSpeed >240){
+        writeToLog("Danger!!");
+    }
+}
+```
+
+### String Handling Function
+
+1. atol: Converts a string to a long integer
+2. itoa: Converts a number to a string
+3. snprintf: Creates a formatted string
+4. strlen: Gets the length of a string
+5. strncat: Concatenates two strings
+6. strncmp: Compares two strings
+7. strncpy: Copies a string
