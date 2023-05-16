@@ -601,3 +601,85 @@ getMeasurementState(): This function returns the current state of the measuremen
 - 1: information
 - 2: warning
 - 3: error
+
+### Replay block and automation functions
+
+- ReplayResume: Resumes replaying log file after it was suspended 
+- ReplayStart: Starts replaying log file from the beginning 
+- ReplayState: Returns the state the replay block is in
+- ReplayStop: Stops replaying log file
+- ReplaySuspend: Suspend replaying log file 
+
+### Environment variable and Panel functions
+
+- callAllOnEnvVar: Calls all environment variable procedures
+- enableControl: Enables or disable an element on an panel
+- getValue: Reads the value of an environment variable
+- getValueSize: Gets the size of an environment variable in bytes
+- makeRGB: Sets primary color values
+- putValue: Assigns a value to an environment variable
+- putValueToControl: Assigns values to multi display control in panels
+
+### CAPL Data Types 
+
+- 8-bit: byte, char
+- 16-bit: int, word
+- 32-bit: dword, long
+- 64-bit(floating point): float, double
+- object: msTimer, Timer, message, pg
+
+```
+
+int j, k =2;
+double x =33.7;
+char p;
+//Array declaration
+long data[10];
+int vector[5]= {0,1,2,3,4};
+int matrix[2][4]={ {2,4,6,8}, {1,3,5,7}};
+char userName[10] = "Jack Beam";
+```
+
+### The Timer and msTimer Objects
+
+- Since CAPL is designed to provide and event-driven environment, timers provide an easy way to cause periodic events.
+- CAPL allows an infinie number of user-defined timers that can be set.
+- Using units of second (Timer) or milliseconds (msTimer).
+- Timers are set using the setTimer function and canceled using cancelTimer functions. The most common way to set up a periodic timer is to set the timer in the initialization (or "on Start") function, set up an event based on this timer to perform a given task, and then reset the timer at the end of this task.
+```
+Timer t1; // Units of seconds
+setTimer(t1,60); // Set to one minute
+msTimer t2; // Units of milliseconds
+setTimer(t2, 100); // Set to one tenth of a second
+```
+
+### Declaring messages in CAPL
+
+- They must be declared like variables, before they can be used
+- Messages can be specified in two ways: Either in an associated database or in a CAPL program itself. Declaring a message specified in an associated database is easy. Just use the symbolic name of the message.
+
+```
+message EngineTemp eTemp;
+message EngineStatus eStat1, eStat2;
+message 411info; //Message ID 411 (Decimal)
+message 0xF2 windowStatus; // Message ID F2 (hex)
+message 142x doorStatus; //Extended CAN message ID 142
+message *userdefined // User defined message generic declaration
+message 0xff rearAxle = {DLC=4};
+```
+
+- In CAPL you can declare messages using the 'message' keyword followed by the message declaration syntax. 
+```
+message MyMessage{
+    using int ID; //it is an unsigned integer field that represents the message ID. It can hold values from 0 to 4294967295
+    byte data[8]; // It is an array of bytes with a size of 8. This field represents the message data payload
+}
+
+on key 's'{
+    MyMessage msg;
+    msg.ID = 0x123;
+    msg.data[0] = 0xAA;
+
+    output(msg);
+}
+```
