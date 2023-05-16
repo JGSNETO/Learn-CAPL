@@ -549,3 +549,55 @@ on message BCMInfo{
 5. strncat: Concatenates two strings
 6. strncmp: Compares two strings
 7. strncpy: Copies a string
+
+### Measurement Control Functions
+
+- In CAPL, measurement control functions are used to interact with and control the measurement and logging capabilities of the CANoe or CANalyzer tool. These functions allow you to start, stop and control the recording of measurement data during a simulation or the session. The measurement control functions provide flexibility and control over the measurement and logging capabilities of the CANoe or CANalyzer tool, allowing you to precisely manage when and how measurement data is recorded during your simulation or test scenarios.  
+  
+- startMeasurement(): This function starts the measurement process. It begins recording measurement data according to the configuration set in the measurement setup.
+
+- stopMeasurement(): This function stops the measurement process. It ceases the recording of measurement data.
+
+- startMeasurementAll(): This function starts all configured measurements. It is used when you have multiple measurement configurations defined and you want to start all of them at once.
+
+- stopMeasurementAll(): This function stops all running measurements. It is used to stop all active measurements in a scenario.
+
+- restartMeasurement(): This function stops the measurement and then starts it again. It can be used to reset the measurement process and start recording from the beginning.
+
+- setMeasurementMode(): This function sets the measurement mode to a specified value. The measurement mode determines how measurement data is recorded and processed. Common modes include continuous measurement, event-triggered measurement, and time-triggered measurement.
+
+- setMeasurementTrigger(): This function sets a trigger condition for the measurement. The measurement will start or stop based on the specified trigger condition.
+
+- enableMeasurement() and disableMeasurement(): These functions enable or disable a specific measurement defined in the measurement setup. It allows you to selectively control which measurements are active during a simulation or test.
+
+getMeasurementState(): This function returns the current state of the measurement. It can be used to determine if the measurement is running, stopped, or in a different state.
+1. ILControlStart: Connect Node to the bus
+2. ILControlStop: Remove Node from the bus
+3. canOffline: Disconnects nodes from bus (CANoe´s simulation setup window only)
+4. canOnline: Reconnects node to the bus(CANoe´s simulation setup window only)
+5. getBusContext: Returns current bus context(CANoe´s simulation setup window only)
+6. getBusNameContext: Returns a specific bus context(CANoes´s simulation setup window only)
+7. getStartdelay: Gets delay time value of current node(CANoe´s Simulation setup window only)
+8. halt: halts the simulation(Only possible in the simulated mode of canoe)
+9. Inspect: Updates the variables in the inspect pane of the write window(CANoe only)
+10. setBuscontext: Sets new context of current bus (CANoe simulation setup window only)
+11. setStartdelay: Sets delay time value of present node (CANoe simulation setup window only)
+12. stop: Stops the measurement
+
+### WriteEx()
+
+- Writes the text into the last line of the specified window or into a tab of the write window without previously creating a new line.
+
+- Window or tab of the write window 
+- -3: trace window
+- -2: trace window for logging output
+- -1: reserved 
+- 0: output to the system tab of the write window 
+- 1: output to the CAPL tab to the write window
+- 4: output to the test tab of the write window
+  
+- Type of message for output in the write window
+- 0: success
+- 1: information
+- 2: warning
+- 3: error
