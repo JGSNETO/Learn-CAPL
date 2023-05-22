@@ -22,6 +22,10 @@
 - Communication protocol functions for RS232 TCP/IP are readily available. Hence we can interface external devices using std network protocol. 
 - CAPL is a event driven software. Triggers: Timer, Key press or Message received. 
 - The execution in CAPL is synchronous.
+- Event based, not interrupt driven.
+- CAPl programs are created using an integrated development environment called the CAPL browser.
+- Direct access to signals, system variables and diagnostic parameters.
+- Able to link user created DLLs.
 
 ### CAPL Fundamentals
 1. You should be familiar with the CAN protocol
@@ -682,4 +686,24 @@ on key 's'{
 
     output(msg);
 }
+```
+### Physical Values x Raw Value
+
+- Physical Value: The physical value repreents the actual real-world value or measurement associated with a specific signal or data parameter. It is the value that has meaningful interpretation in the context of the application or system. For example, in the case of a temperature sensor, the physical value could represent the temperature in degrees celsius or harenheit. 
+- Raw value: The raw value, also knows as the encoded or bit-level value, refers to the actual binary data that is transmitted or received over the communication network. It represents the value as it is encoded and formatted according to the communication protocol or data format being used. The raw value typically consistis of a sequence of bits that need to be decoded or processed to obtain the physical value. 
+- In CAPL, you can often access both the physical value and raw value of signals or data parameters. The raw value is typically obtained directly from the communication network, while the physicial value is derived from the raw value using decoding, scaling or conversion techniques based on the specific data format and signal definition. 
+
+
+```
+//Physical Value
+on key 'f'{
+    setSignal(ECMInfo::FuelLevel, 2.5);
+}
+
+//Raw Value
+
+on key 'r'{
+    ILSetSignalRaw(ECMInfo::FuelLevel, 25);
+}
+
 ```
