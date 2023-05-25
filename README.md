@@ -707,3 +707,52 @@ on key 'r'{
 }
 
 ```
+
+### Message Selectors 
+
+- In CAPL, a message selector is used to filter and process specific CAN messages based on their priorities, such as the identifier(ID), DLC(Data Length Code), or data content. The message selector allows you to define conditions to selectively process incoming CAN message. The message selector is typically used with the 'on message' event in CAPL, which is triggered when a CAN message is received. Here is an example of using a message selector in CAPL:
+```
+on message CAN_Message msg{
+    if(msg.id == 0x123 && msg.dlc==8){
+        //process the can message with ID 0x123 and DLC 8
+        //Your code here
+    }
+}
+```
+- By using message selectors, you can filter and process specific CAN message of interest enabling you to control the behaviour of your CAPL program based on the message properties. 
+
+Selector - Description - Valid Values
+
+- ID: Message Identifier: Any valid CAN message ID
+- CAN: Chip number: 1 or 2
+- DLC: Data length Code: 0 to 8
+- DIR: Direction of transmission: RX(Received); TX(Transmit); TXREQUEST(Transmit Request)
+- RTR: Remote TransmissionRequest: 0(not an RTR); 1(RTR)
+- TYPE: Combination of DIR and RTR: See below
+- TIME: Time stamp of the message in units of 10ms(Read only): Long integer
+- SIMULATED: Sent by a simulated node: 0(real node); 1(simulated node)
+
+### Environment Variable Functions
+
+- In CAPL, there are several functions avaiable for working with environment variables. Environment variables are system-lvel variables that store information about the environment in which a program is executed. CAPL provides functions to access and manipulate these variables. 
+
+1. 'getenv()': This function is used to retrieve the value of an environment variable. It takes the name of the environment variable as an argment and returns the corresponding value as a string. 
+```
+variables:
+    char* value;
+on start:
+    value = getenv("HOME");
+    write("Home directory: ", value);
+``` 
+2. 'putenv()': This function is used to set or modify the value of an environment variable. it takes a string argument in the format "variable=value" and updates the corresponding environment variable with the specified value. 
+```
+on start:
+    putenv("MY_VARIABLE=my_value");
+```
+3. 'unsetend()': This function is used to unset or remove an environment variable. It takes the name of the environment variable as an argument and removes it from the environment. 
+```
+on start:
+    unsetenv("MY_VARIABLE");
+```
+
+- These functions allow you to interact with environment variables within your CAPL scripts. They can be useful for accessing system-related information, configuration settings, or passing data between different software components. Make sure to refer to the CAPL documentation for detailed information on these functions and their usage. 
