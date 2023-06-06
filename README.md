@@ -756,3 +756,38 @@ on start:
 ```
 
 - These functions allow you to interact with environment variables within your CAPL scripts. They can be useful for accessing system-related information, configuration settings, or passing data between different software components. Make sure to refer to the CAPL documentation for detailed information on these functions and their usage. 
+
+### Built in Constants 
+
+- CAPL provides some built-in constant values for use in your programs. Some of them only are used in specific cases.
+- However, you might find the PI constant useful. It contains the value of a pi to the maximum.
+- Also, the constants LPT1, LPT2 and LPT3 can be used in the place of port addresses for the import() and output() functions. 
+
+### Events in CAPL
+
+- CAPL is an event-driven language. This means that sections of a program are executed in response to specific occurences(Events) rather than the whole program being executed all at once. 
+- In CAPL, an event procedure is associated with every event that is important to the application. 
+- On message: More detail more priority
+```
+on message CAN1.0x123{
+
+}
+
+on message 0x123{
+
+}
+
+on message * {
+
+}
+
+```
+
+### P block placement in measurement setup
+
+- Program block are included in Measurement.
+- In the context of CANoe from Vector, the P box refers to the Protocol Layer Block. It is a configuration block used to define the communication protocols and message formats for simulating or testing various network protocols in a simulated environment.
+- The P block allows you to specify the network protocols, such as CAN, LIN, FlexRay, Ethernet, etc. and configure their parameters, including message identifiers, data formats, signal definitions, and transmission/reception behavior. It provides an interface for defining the communication behavior of simulated ECUs or network nodes.
+- By configuring the P block, you can define the messages and signals that are transmitted and received on the simulated network, allowing you to simulate various communication scenarios and test the behavior of your system under different network conditions. 
+- The P block is an essential component of CANoe, as it enables the simulation and testing of different network protocols and the exchenge of message between ECUs or network nodes. It provides a high level of flexibility and control over the communication behaviour, allowing you to design and execute comprehensive test for your system. 
+
