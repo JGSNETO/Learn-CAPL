@@ -783,11 +783,37 @@ on message * {
 
 ```
 
-### P block placement in measurement setup
+### Protocol Layer block placement in measurement setup
 
-- Program block are included in Measurement.
+
 - In the context of CANoe from Vector, the P box refers to the Protocol Layer Block. It is a configuration block used to define the communication protocols and message formats for simulating or testing various network protocols in a simulated environment.
 - The P block allows you to specify the network protocols, such as CAN, LIN, FlexRay, Ethernet, etc. and configure their parameters, including message identifiers, data formats, signal definitions, and transmission/reception behavior. It provides an interface for defining the communication behavior of simulated ECUs or network nodes.
 - By configuring the P block, you can define the messages and signals that are transmitted and received on the simulated network, allowing you to simulate various communication scenarios and test the behavior of your system under different network conditions. 
 - The P block is an essential component of CANoe, as it enables the simulation and testing of different network protocols and the exchenge of message between ECUs or network nodes. It provides a high level of flexibility and control over the communication behaviour, allowing you to design and execute comprehensive test for your system. 
 
+### Program Block
+- Program block are included in Measurement.
+- Want our own block to analyze the traffic 
+- In CANoe, a program block is a powerful feature tat allows you to extend the functionality of the tool by writing custom scripts. Program blocks are written in CAPL(Communication Access Programming Language), which is a scripting language specific to Vecto CANoe. 
+- Program blocks can be used to perform various tasks, such as simulating complex network behavior, implementing custom diagnostics, generating dynamic test cases, and more. They provide a way to automate and customize the behavior of the CANoe environemnt.
+ ```
+ void MyProgramBlock(){
+    write("Hello, CANoe!");
+ }
+
+```
+- In the above example, the program block is defined as a function named "MyProgramBlock()". Within this function, you can write your custom code. In this case, it simply writes the message "Hello, CANoe" to the write window.
+- Program blocks can be executed in different ways, such as automatically at startup, triggered by specific events, or called from other program blocks or panels. They can access and manipulate simulation variables, send and receive messages on the bus, interact with the user interface and much more. 
+- To create a program nlock in CANoe, you typically follow these steps:
+1. Open your CANoe configuration
+2. Go to "Configuration" menu and select "programs"
+3. In the program editor, write you CAPL code
+4. Save the program block with an appropriate name and extension
+5. Optionally, configure the program block execution setting, such as startup behaviour or event triggers
+6. Build and start the simulation to execute the program block
+
+- Remember that program blocks in CANoe are highly customizable and can be as simple or complex as you need them to be. The CAPL language provides a wide range of functions and features to interact with the CANoe environment and simulate various scenarios. 
+ 
+ 
+ 
+ 
